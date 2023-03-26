@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      background-color: #236FA1;
+      color: white;
+      font-family: "Lato-Bold", sans-serif;
+      font-size: 48px;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #countdown {
+      background-color: #236FA1;
+      color: #fff;
+      padding: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown"></div>
+
+  <script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("March 26, 2023 18:30:0 EST").getTime();
+
+    // Update the countdown every 1 second
+    var x = setInterval(function() {
+
+      // Get the current time
+      var now = new Date().getTime();
+
+      // Calculate the time remaining
+      var distance = countDownDate - now;
+
+      // Calculate days, hours, minutes, and seconds remaining
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Build the countdown timer string
+      var countdownString = "";
+
+      if (days > 0) {
+        countdownString += days + "d ";
+      }
+
+      if (hours > 0 || days > 0) {
+        countdownString += hours + "h ";
+      }
+
+      if (minutes > 0 || hours > 0 || days > 0) {
+        countdownString += minutes + "m ";
+      }
+
+      if (seconds > 0 || minutes > 0 || hours > 0 || days > 0) {
+        countdownString += seconds + "s ";
+      }
+
+      // Display the countdown timer
+      if (countdownString == "") {
+        document.getElementById("countdown").style.color = "white";
+        document.getElementById("countdown").innerHTML = "EXPIRED";
+      } else {
+        document.getElementById("countdown").innerHTML = countdownString;
+      }
+
+      // If the countdown is finished, display a message
+      if (distance <= 0) {
+        clearInterval(x);
+        document.getElementById("countdown").style.color = "white";
+        document.getElementById("countdown").innerHTML = "EXPIRED";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
